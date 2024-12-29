@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 # fastapi is the main package/library
 #FastAPI is the specific class you're importing from it
-
-
+from typing import Optional
+from pydantic import BaseModel
 app = FastAPI()
 
 
 # ? is the query parameter
 @app.get('/blog')   # this decorator will run the below function at some port no
-def index(limit=10, published:bool=True):
+def index(limit=10, published:bool=True , sort: Optional[str] = None):
     
     if (published):
         return {'data': f'{limit} published blogs from the Database'}
@@ -30,13 +30,10 @@ def show(id:int):
 
 
 
-
-
- 
-
 @app.get('/blog/{id}/comments')  # use curly braces as you want dynamic id 
-def comments(id):
+def comments(id , limit = 10 , ):
     #fetch blog with id = id
+     return limit
      return {
             "data": [
                 {"id": 1, "comment": "First comment"},
@@ -44,4 +41,18 @@ def comments(id):
             ]
         }
 
-# for testing 
+
+class  Blog(BaseModel):
+    title: str
+    body: str
+     published: Optional[bool]
+
+
+
+
+
+
+@app.post('/blog')
+def create_blog(blog: Blog):
+    return {'data' : f"blog is created with title as {request.title}"} 
+    
