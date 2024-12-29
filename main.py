@@ -45,7 +45,7 @@ def comments(id , limit = 10 , ):
 class  Blog(BaseModel):
     title: str
     body: str
-     published: Optional[bool]
+    published: Optional[bool]
 
 
 
@@ -55,4 +55,3 @@ class  Blog(BaseModel):
 @app.post('/blog')
 def create_blog(blog: Blog):
     return {'data' : f"blog is created with title as {request.title}"} 
-    
