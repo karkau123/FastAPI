@@ -269,3 +269,48 @@ print(c1.varC)
     # when the same operator is allowed to have different meanings according to context
     # + -> for both addition and concatenation
 
+class Complex:
+    def __init__(self , real , img):
+        self.real = real
+        self.img = img
+    
+    def showno (self):
+        print(self.real,"i +" , self.img ,"j")
+
+    def __add__ (self , num2):             # now this add is a dunder function -> __add is a inbuilt fnction
+        numReal = self.real + num2.real
+        numImg = self.img + num2.img
+        return Complex(numReal , numImg)  
+
+    def __sub__(self , num2):
+        numReal = self.real - num2.real
+        numImg = self.img - num2.img
+        return Complex(numReal , numImg) 
+
+
+
+
+num1 = Complex(1 , 2)         
+num1.showno()
+
+num2 = Complex(4 , 6)
+num2.showno()
+
+num3  = num1 + num2
+num3.showno()
+
+num4 = num1 - num2
+num4.showno()
+
+
+
+# above is the best example of 
+# if you just write num1 + num2 it will produce error as it will say + can't add to complex
+# so for this purpose use dunder function
+
+
+# Dunder Functions -> __fun -> double underscore in front of the function name
+
+    # a + b  --> Addition                a.__add__(b)
+
+
